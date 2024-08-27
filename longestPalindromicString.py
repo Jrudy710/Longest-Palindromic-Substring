@@ -21,27 +21,20 @@ def longestOne(s):                                                              
          theSubstring = letter if len(letter) > len(theSubstring) else theSubstring          # Sets the value of theSubstring
       
       # Then we need to expand the palindromic substring 
-      start = LCV                                                                            # Sets the current value of start
-      end = start + 1                                                                        # Sets the current value of end
+      end = LCV + 1                                                                          # Sets the value of end
       
       #print(f"{LCV}: {letter} with substring {s[LCV: LCV+1]}")
-      endExpansion = True                                                                    # Sets the value of endExpansion
       
-      while start >= 0 and end + 1 != len(s):                                                     # While Loop      
+      while end + 1 <= len(s):                                                               # While Loop
          
-         if endExpansion:                                                                    # If statement
-            end += 1                                                                         # Adds to the value of end
-            endExpansion = False                                                             # Sets the value of endExpansion
+         end += 1
          
-         else:                                                                               # Else statement
-            start -= 1                                                                       # Subtracts from the value of start
-            endExpansion = True                                                              # Sets the value of endExpansion
+         #print(f"Looking at substring {s[LCV: end]}")
          
-         print(f"Looking at substring {s[start: end]}")
-         if s[start: end] not in palindromic.keys():                                         # If the substring isn't in the dictionary
-            palindromic[s[start: end]] = isPalindrome(s[start: end])                         # Sets the value in the dictionary
+         if s[LCV: end] not in palindromic.keys():                                           # If the substring isn't in the dictionary
+            palindromic[s[LCV: end]] = isPalindrome(s[LCV: end])                             # Sets the value in the dictionary
             
-         theSubstring = s[start: end] if palindromic[s[start: end]] and len(s[start: end]) > len(theSubstring) else theSubstring
+         theSubstring = s[LCV: end] if palindromic[s[LCV: end]] and len(s[LCV: end]) > len(theSubstring) else theSubstring
          
    
    return theSubstring                                                        # sub string returned to the user
@@ -51,13 +44,13 @@ def isPalindrome(s):                                                          # 
    
    reversion = s[::-1]                                                        # Reverses the passed string
    
-   print(f"Comparing {reversion} and {s}: {reversion == s}")
+   #print(f"Comparing {reversion} and {s}: {reversion == s}")
    
    return reversion == s                                                      # Returns whether the two strings are the same
 
 def main():
 
-   s = "adam"
+   s = "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
    
    print(f"The longest one is {longestOne(s)}")
 
